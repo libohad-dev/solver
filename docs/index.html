@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solecistic Versioning</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1 id="solecistic-versioning">Solecistic Versioning <span class="version-number">1.0.0</span></h1>
+
+    <p class="tagline"><em>A backwards-compatibility paradigm that actually solves the problem of API breakage</em></p>
+
+    <h2 id="summary">Summary</h2>
+    <p>Given a version number MAJOR.MINOR.PATCH, increment the:</p>
+    <ol>
+      <li><strong>MAJOR</strong> version when you add exciting new APIs while keeping all the old ones working</li>
+      <li><strong>MINOR</strong> version when you add features to existing APIs compatibly</li>
+      <li><strong>PATCH</strong> version when you make bug fixes that might break someone</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>This is a versioning scheme for people who've realized that Every Pin is a Pin of Shame.</strong>
+    </div>
+
+    <h2 id="introduction">Introduction</h2>
+    <p>In the world of software dependency management, there exists a special place of suffering. It's the place where your perfectly functional system breaks because someone, somewhere, decided their v2.0.0 was too important to maintain backwards compatibility. We call this place "dependency hell," but as Sartre might have observed: <em>(Dependency) Hell is Other People</em>.</p>
+
+    <p><a href="https://semver.org/">The Semantic Versioning specification</a> was created to bring sanity to this chaos. It promised a world where version numbers would telegraph safety and danger. But it got things exactly backwards.</p>
+
+    <p>Solecistic Versioning (SolVer) takes a different approach: What if we developed, updated, and versioned software based on how it actually affects users, not how we wish they'd adapt to our changes?</p>
+
+    <h2 id="specification">Solecistic Versioning Specification (SolVer)</h2>
+    <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC 2119</a>.</p>
+
+    <ol>
+      <li>Software using Solecistic Versioning MUST declare a public API. This API can be declared in the code itself or exist strictly in documentation. However it is done, it SHOULD be precise and comprehensive.</li>
+
+      <li>A normal version number MUST take the form X.Y.Z where X, Y, and Z are non-negative integers, and MUST NOT contain leading zeroes. X is the major version, Y is the minor version, and Z is the patch version. Each element MUST increase numerically. For instance: 1.9.0 → 1.10.0 → 1.10.1.</li>
+
+      <li>Once a versioned package has been released, the contents of that version MUST NOT be modified. Any modifications MUST be released as a new version.</li>
+
+      <li>Major version X (X.y.z | X > 0) MUST be incremented when you introduce new public APIs. Think of it as announcing "We've built something new and exciting for you to explore—at your leisure, of course!" All previous APIs MUST continue to function. Major versions are advertisements, not earthquakes.</li>
+
+      <li>Minor version Y (x.Y.z | x > 0) MUST be incremented if new, backwards compatible functionality is introduced to the existing public API. It MUST be incremented if any public API functionality is marked as deprecated.</li>
+
+      <li>Patch version Z (x.y.Z | x > 0) MUST be incremented for changes that only include bug fixes, without introducing a change in the public API or its intended semantics. A bug fix is defined as an internal change that fixes incorrect behavior or improves performance. NOTE: While the API remains unchanged, behavior changes MAY break systems that depended on the previous (incorrect) behavior.</li>
+    </ol>
+
+    <h2 id="why-use-solver">Why Use Solecistic Versioning?</h2>
+    <p>This isn't about being clever or contrarian. Look at the software that actually works at scale:</p>
+    <ul>
+      <li>The Web platform adds features for decades while ancient pages still render</li>
+      <li>The Linux kernel maintains userspace compatibility across thousands of releases</li>
+      <li>Rich Hickey develops the Clojure toolset with the express goal to never break existing code</li>
+      <li>Go promises compatibility within major versions since 1.0</li>
+    </ul>
+
+    <p>These projects understand a fundamental truth: <strong>Your users' code is more important than your code.</strong></p>
+
+    <h2 id="every-pin-is-a-pin-of-shame">Every Pin is a Pin of Shame</h2>
+    <p>In the YouTube era, we've learned about the "Pin of Shame"—that mark of condemnation when a comment violates the community's standards. As library maintainers, we need to recognize that every version pin in a dependency file represents a similar vote of no confidence.</p>
+
+    <p>When a user writes <code>"your-library": "^2.3.4"</code> instead of <code>"your-library": "*"</code>, they're telling you:</p>
+    <blockquote>"I don't trust you not to break my code."</blockquote>
+
+    <p>But this isn't just about individual maintainers. Users have been trained, through bitter experience across the entire ecosystem, that updates mean breakage. Each pin is a small monument to every breaking change that has been forced upon them, every hour lost debugging mysterious failures after routine updates. It's a learned defensive behavior in an ecosystem where compatibility is the exception rather than the rule.</p>
+
+    <p>SolVer aims for a world without pins, where <code>"solecistic-library": "*"</code> is not an act of reckless optimism but reasonable trust. <strong>The Pinless World is a painless world.</strong></p>
+
+    <h2 id="the-unsafety-pin">The Unsafety Pin: Security in a Pinless World</h2>
+    <p>Version pinning isn't just a symptom of poor compatibility practices—it's a security vulnerability. Every pinned dependency is a potential unpatched security hole waiting to be exploited.</p>
+
+    <p>Yes, sometimes updates introduce new problems. A security fix might have its own vulnerability, a bug fix might cause a regression. When this happens, users will pin versions—and we'll deserve that Pin of Shame. No versioning system can prevent human error.</p>
+
+    <p>But here's why SolVer's vision matters: when pins are the exception rather than the rule, they become manageable. In a world where most dependencies can float freely, the few necessary pins stand out. They're documented, they're temporary, and they're removed as soon as fixes arrive. Security updates flow through the ecosystem by default, reaching everyone on the next <code>npm install</code>, <code>cargo update</code>, or <code>go get -u</code>.</p>
+
+    <p>The irony remains sharp: the very pins we add for "safety" become unsafety pins, keeping out the security updates we desperately need. The solution isn't perfect pinning—it's building an ecosystem where pinning is rarely necessary.</p>
+
+    <h2 id="experimental-features">Experimental Features: Innovation Without Breakage</h2>
+    <p>Mature libraries need to innovate. Limiting experimentation to just the 0.x.y version range is impractical—well-established projects must still explore new ideas and gather community feedback.</p>
+
+    <p>By their nature, experimental features can't guarantee compatibility, so they technically fall outside SolVer's scope. However, there are proven patterns for responsible experimentation:</p>
+
+    <ul>
+      <li><strong>Separate experimental packages</strong>: <code>your-library-experimental</code> can break all it wants without affecting <code>your-library</code></li>
+      <li><strong>Explicit opt-in flags</strong>: Features behind <code>enableExperimentalAPI: true</code> make dependencies clear</li>
+      <li><strong>Clear labeling</strong>: Runtime warnings, documentation badges, or console notices when experimental features are used</li>
+      <li><strong>Time limits</strong>: Don't let features linger in "experimental" limbo forever</li>
+    </ul>
+
+    <p>Remember: your users will eventually depend on "unstable" features just as much as stable ones. If you're gathering insights from the community (which of course you are, right?), be transparent about the trial process. Provide a roadmap showing which experiments are approaching stability versus those headed for removal.</p>
+
+    <p>The goal is simple: let your stable API remain stable while still leaving room to innovate.</p>
+
+    <h2 id="the-rare-art-of-deprecation">The Rare Art of Deprecation</h2>
+    <p>While eternal backwards compatibility is the ideal, the real world sometimes demands change. The masters of stability show us how it's done:</p>
+
+    <p><strong>Microsoft Windows</strong> can still run many executables from the 1990s. Raymond Chen's blog "The Old New Thing" documents countless stories of <a href="https://devblogs.microsoft.com/oldnewthing/20031224-00/?p=41363">maintaining compatibility</a>, including keeping <a href="https://devblogs.microsoft.com/oldnewthing/20170911-00/?p=96995">bugs</a> that applications depend on. When Windows can't maintain perfect compatibility, it offers compatibility modes and shims.</p>
+
+    <p><strong>The Linux Kernel</strong> officially promises to maintain support for any hardware or feature that still has active users. Linus Torvalds famously said, <a href="https://lkml.org/lkml/2012/12/23/75">"We do not break userspace!"</a> Only completely unused features may eventually stop working.</p>
+
+    <p><strong>The Java Platform</strong> treats backward compatibility as sacred. APIs deprecated in Java 1.1 still function today. When Java must evolve (like introducing the module system or restricting reflection), it provides multi-year migration paths with specific compatibility flags and detailed migration guides.</p>
+
+    <p><strong>GNU Emacs</strong> does deprecate features, but follows a deprecation cycle that can take years or even decades:</p>
+    <ol>
+      <li>Mark as deprecated in documentation</li>
+      <li>Add runtime warnings (that can be silenced)</li>
+      <li>Increase warning visibility over multiple major versions</li>
+      <li>Provide migration tools and clear alternatives</li>
+      <li>Only then, maybe, consider removal</li>
+    </ol>
+
+    <p>When introducing deprecation warnings, remember that some users treat warnings as errors in their CI pipelines. Provide mechanisms to control warning visibility, such as environment variables or configuration flags. The warning itself should mention how to suppress it, giving users an immediate workaround while they plan their migration.</p>
+
+    <p>In extreme cases, some APIs must be removed due to security concerns. This is essentially the <em>only</em> valid reason to break compatibility with actively used features. Even then, strive to:</p>
+    <ul>
+      <li>Make the minimal change necessary to address the security issue</li>
+      <li>Provide a compatibility shim where possible</li>
+      <li>Offer automated migration tools</li>
+      <li>Give users ample time and warning</li>
+    </ul>
+
+    <h2 id="alternative-versioning-schemes">Alternative Versioning Schemes</h2>
+    <p>The beauty of maintaining compatibility is that version numbers become merely informational. As long as the latest version is always safe to use, you can adopt any versioning scheme that allows package managers to determine what's newest:</p>
+
+    <ul>
+      <li><strong>Calendar Versioning</strong>: <code>YYYY.MM.DD</code> — Every release is just a date</li>
+      <li><strong>Integer Versioning</strong>: <code>1</code>, <code>2</code>, <code>3</code>... — Pure simplicity</li>
+      <li><strong>Animal-based Versioning</strong>: <code>aardvark</code>, <code>bison</code>, <code>caribou</code>... — Ubuntu used these to great effect</li>
+      <li><strong>Phonetic alphabet Versioning</strong>: <code>alpha</code>, <code>bravo</code>, <code>charlie</code>... — The NATO phonetic alphabet never goes out of style</li>
+    </ul>
+
+    <p>The version string doesn't matter when every version is compatible.</p>
+
+    <h2 id="when-you-decide-to-switch">When You Get Tired of Breaking Changes</h2>
+    <p>The beautiful thing about SolVer? It sorts lexically after SemVer. So when you get tired of your v7→v8 migration fragmenting your user community yet again, you can safely switch. Your users will thank you.</p>
+
+    <h2 id="faq">FAQ</h2>
+
+    <div class="faq">
+      <h4>Q: Isn't this just SemVer with different rules?</h4>
+      <p>A: No. SemVer is a formalized system for <em>announcing</em> when you're going to break your users' code. SolVer is a philosophy that says you <em>shouldn't break their code</em>. SemVer tells you how to communicate breakage; SolVer asks why you're breaking things at all. Three-number version strings existed long before SemVer—what matters is the commitment they represent, and SolVer represents the commitment to put users first.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: Wait, bug fixes can break things? How does that make sense?</h4>
+      <p>A: Bug fixes are, by definition, behavior changes. If your code worked around a bug, fixing the bug could break your code. If you inadvertently relied on broken behavior, fixing that bug will <em>definitely</em> break your code. SemVer actually calls patch versions "backward compatible bug fixes," but this is an oxymoron—there's no such thing as a behavior change that's guaranteed compatible. SolVer just admits this reality.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: What about CI pipelines that treat warnings as errors?</h4>
+      <p>A: Even deprecation warnings should be introduced thoughtfully. Provide flags to control warning visibility (e.g., <code>--no-deprecation-warnings</code>) and mention these flags in the warning messages themselves. This gives pipeline maintainers a quick fix while still nudging them toward addressing deprecations. Remember: even with such affordances, deprecation should remain a rare last resort.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: But what if I need to remove deprecated APIs?</h4>
+      <p>A: See <a href="#the-rare-art-of-deprecation">"The Rare Art of Deprecation"</a> above. The bytes you save are worth less than the trust you lose.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: This seems impractical for experimental software.</h4>
+      <p>A: Use 0.x.y versions for experimentation. Once you hit 1.0.0, you're making a commitment. For mature projects, see <a href="#experimental-features">"Experimental Features"</a> above.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: How do I indicate which APIs are deprecated?</h4>
+      <p>A: Documentation, compile-time warnings, runtime warnings, migration guides. Give your users every tool except breakage.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: What if my old API design was fundamentally flawed?</h4>
+      <p>A: Then your new API is a new feature, not a replacement. Ship both. Let users migrate when they're ready, not when you are.</p>
+    </div>
+
+    <div class="faq">
+      <h4>Q: How do I actually maintain compatibility when adding new APIs?</h4>
+      <p>A: There's no one-size-fits-all approach, but successful strategies include: maintaining a comprehensive test suite that covers real usage patterns; using feature flags or optional parameters for new functionality; and designing APIs with extension points from the start.</p>
+      <p>In extreme cases where truly incompatible paradigms are needed, consider the Basecamp approach: when version 3 launched, they committed to maintaining Basecamp Classic and Basecamp 2 <a href="https://signalvnoise.com/svn3/service-sunsets-arent-the-least-bit-pretty/">"until the end of the internet"</a>—a promise they're <a href="https://www.37status.com/">still keeping</a> nearly a decade later. Sometimes the answer is to treat your new version as a new product.</p>
+    </div>
+
+    <h2 id="about">About</h2>
+    <p>The Solecistic Versioning specification is authored by <a href="https://github.com/libohad-dev">Ohad Livne</a>, who has spent too many hours fixing broken builds and applications after innocuous-looking updates.</p>
+
+    <p>If you'd like to contribute, please <a href="https://github.com/libohad-dev/solver">open an issue or PR</a>.</p>
+
+    <h2 id="license">License</h2>
+    <p><a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons - CC BY 4.0</a></p>
+
+    <script src="https://unpkg.com/anchor-js@4.3.1/anchor.min.js"></script>
+    <script>
+      anchors.add('h2, h3, h4');
+    </script>
+  </body>
+</html>
